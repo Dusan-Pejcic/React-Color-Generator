@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import SingleColor from './SingleColor';
 
 import Values from 'values.js'; // https://github.com/noeldelgado/values.js
 
@@ -13,6 +14,7 @@ function App() {
 
     try{
       let colors = new Values(color).all(10); // a values.js function to return tints and shades for a passed hexadecimal value.
+      setList(colors);
       setError(false);
     }
     catch(err){ // values.j throws an error if a passed string is not a valid hexadecimal value.
@@ -29,10 +31,13 @@ function App() {
         <input className={ error ? 'error' :null} type="text" value={color} onChange={(e) => setColor( e.target.value)} placeholder='#f15025'/>
         <button className="btn">submit</button>
       </form>
-      { error && <p>type a valid hexadecimal value</p>}
+      { error && <p>not a valid hexadecimal value</p>}
     </section>
     <section className="colors">
-      <h4>list goes here</h4>
+      { list.map((color, index)=> {
+        console.log(color);
+        return <SingleColor key={index} {...color} index={index} />
+      })}
     </section>
     </>
   );
