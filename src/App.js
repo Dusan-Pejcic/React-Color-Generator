@@ -27,16 +27,19 @@ function App() {
     <>
     <section className="container">
       <h3>color generator</h3>
+
       <form onSubmit={ handleSubmit }>
         <input className={ error ? 'error' :null} type="text" value={color} onChange={(e) => setColor( e.target.value)} placeholder='#f15025'/>
         <button className="btn">submit</button>
       </form>
+
       { error && <p>not a valid hexadecimal value</p>}
+
     </section>
+
     <section className="colors">
       { list.map((color, index)=> {
-        console.log(color);
-        return <SingleColor key={index} {...color} index={index} />
+        return <SingleColor key={index} {...color} index={index} hexColor={color.hex} />
       })}
     </section>
     </>
