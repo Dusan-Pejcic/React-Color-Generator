@@ -8,6 +8,7 @@ function App() {
   const [color, setColor] = useState([]);
   const [error, setError] = useState(false);
   const [list, setList] = useState([]);
+  const [inputValue, setInputValue] = useState('');
 
   const handleSubmit = (e)=> {
     e.preventDefault();
@@ -16,11 +17,17 @@ function App() {
       let colors = new Values(color).all(10); // a values.js function to return tints and shades for a passed hexadecimal value.
       setList(colors);
       setError(false);
+      setInputValue('');
     }
     catch(err){ // values.j throws an error if a passed string is not a valid hexadecimal value.
       console.log(err.message);
       setError(true);
     }
+  }
+
+  const handleOnChange = (e)=> {
+    setColor( e.target.value);
+    setInputValue(e.target.value);
   }
 
   return (
@@ -29,7 +36,7 @@ function App() {
       <h3>color generator</h3>
 
       <form onSubmit={ handleSubmit }>
-        <input className={ error ? 'error' :null} type="text" value={color} onChange={(e) => setColor( e.target.value)} placeholder='#f15025'/>
+        <input className={ error ? 'error' :null} type="text" value={color} onChange={(e) => handleOnChange(e)} value={inputValue} placeholder='enter hex code'/>
         <button className="btn">submit</button>
       </form>
 
