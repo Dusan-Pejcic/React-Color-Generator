@@ -36,7 +36,7 @@ function App() {
       <h3>color generator</h3>
 
       <form onSubmit={ handleSubmit }>
-        <input className={ error ? 'error' :null} type="text" value={color} onChange={(e) => handleOnChange(e)} value={inputValue} placeholder='enter hex code'/>
+        <input className={ error ? 'error' :null} type="text" value={color} onChange={handleOnChange} value={inputValue} placeholder='enter hex code'/>
         <button className="btn">submit</button>
       </form>
 
